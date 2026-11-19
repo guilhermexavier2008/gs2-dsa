@@ -1,0 +1,200 @@
+[
+  {
+    "id": "T01",
+    "nome": "Operações sobre lista vazia (listar, consultar, atualizar, excluir, pesquisar, ordenar)",
+    "pre": "Lista vazia",
+    "entrada": "3, 2, 4, 5, 6, 7, 0",
+    "esperado": "Cada operação informa 'A lista está vazia' sem erro; sistema não quebra",
+    "observado": "Mensagem 'A lista está vazia' exibida 6 vez(es); tamanho = 0",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T02",
+    "nome": "Cadastro válido de um serviço",
+    "pre": "Lista vazia",
+    "entrada": "1 → id 201, título, categoria 1, descrição, público, canal, horário; depois 3 (listar)",
+    "esperado": "Mensagem de sucesso; registro aparece na listagem (total 1)",
+    "observado": "Registro 201 encontrado: Segunda via de certidão; categoria = Documentos; tamanho = 1",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T03",
+    "nome": "Cadastro com entradas inválidas (vazios, texto no id, zero, negativo, categoria inexistente, textos curtos)",
+    "pre": "Lista vazia",
+    "entrada": "id: '', 'abc', '0', '-5', '7.5' e depois 301; título: '', 'ab'; categoria: '99', 'esporte'; descrição/público/canal vazios ou curtos",
+    "esperado": "Mensagem clara para cada erro, o campo é solicitado novamente e só então o registro é salvo",
+    "observado": "Cada entrada inválida gerou mensagem e foi pedida novamente; registro 301 salvo com horário 'Não informado'; tamanho = 1",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T04",
+    "nome": "Identificador duplicado",
+    "pre": "Registro 201 já cadastrado",
+    "entrada": "1 → id 201 (duplicado); depois id 202 e demais campos",
+    "esperado": "Mensagem 'já está em uso'; novo id aceito; lista com 2 registros (201 e 202)",
+    "observado": "Mensagem de duplicidade exibida; ids na lista = [201, 202]",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T05",
+    "nome": "Carregar dados de exemplo e listar todos (e repetir a carga)",
+    "pre": "Lista vazia",
+    "entrada": "8, 3, 8, 0",
+    "esperado": "8 registros carregados e listados; segunda carga não duplica",
+    "observado": "Carga de 8 registros, listagem com 'Total: 8' e segunda carga sem duplicar; tamanho = 8",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T06",
+    "nome": "Consultar registro pelo identificador (existente)",
+    "pre": "8 registros de exemplo",
+    "entrada": "2 → 103",
+    "esperado": "Exibe todos os campos do registro 103",
+    "observado": "Detalhes completos do registro 103 exibidos (Vacinação infantil / Saúde)",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T07",
+    "nome": "Consultar identificador inexistente e valor incompatível",
+    "pre": "8 registros de exemplo",
+    "entrada": "2 → 'xyz', depois 999",
+    "esperado": "Erro de formato para 'xyz'; mensagem 'não encontrado' para 999",
+    "observado": "Entrada 'xyz' rejeitada; id 999 retornou 'não encontrado'",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T08",
+    "nome": "Atualizar registro existente (alterar título e horário, manter o resto com Enter)",
+    "pre": "8 registros de exemplo",
+    "entrada": "4 → 103; novo título; Enter nos campos a manter; novo horário; depois 2 → 103",
+    "esperado": "Registro atualizado; campos não alterados permanecem; consulta mostra novos valores",
+    "observado": "Título = 'Vacinação infantil e de adultos'; categoria mantida = 'Saúde'; horário = 'Seg a Sáb, 7h às 17h'",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T09",
+    "nome": "Atualizar com valor inválido",
+    "pre": "8 registros de exemplo",
+    "entrada": "4 → 103; título 'ab' (inválido) e depois 'Vacinação em campanha'",
+    "esperado": "Mensagem de erro, campo pedido novamente e atualização concluída com valor válido",
+    "observado": "Título 'ab' rejeitado; valor válido gravado: 'Vacinação em campanha'",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T10",
+    "nome": "Atualizar identificador inexistente",
+    "pre": "8 registros de exemplo",
+    "entrada": "4 → 999",
+    "esperado": "Mensagem 'não encontrado'; nada é alterado",
+    "observado": "Mensagem 'não encontrado'; lista inalterada (8 registros)",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T11",
+    "nome": "Excluir registro (confirmação inválida, confirmação 's', cancelamento 'n' e id inexistente)",
+    "pre": "8 registros de exemplo",
+    "entrada": "5 → 104, 'x', 's'; 5 → 108, 'n'; 5 → 999",
+    "esperado": "104 removido; 108 permanece; 999 'não encontrado'; total passa de 8 para 7",
+    "observado": "104 excluído; 108 mantido (cancelado); 999 não encontrado; tamanho = 7; invariantes OK",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T12",
+    "nome": "Remoção no início, no meio e no fim da lista encadeada (ponteiros início/fim)",
+    "pre": "Lista com ids 1 a 5",
+    "entrada": "remover(1), remover(3), remover(5), remover(9), inserir(6), esvaziar",
+    "esperado": "Ligações corretas; ids [2, 4, 6]; 'fim' atualizado; lista vazia termina com início e fim nulos",
+    "observado": "Removidos primeiro, meio e último; ids restantes [2, 4, 6] após novo insert; lista esvaziada com inicio=fim=None",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T13",
+    "nome": "Pesquisar por título (ignora maiúsculas e acentos)",
+    "pre": "8 registros de exemplo",
+    "entrada": "6 → 1 (título) → 'EMISSAO'",
+    "esperado": "Retorna 'Emissão de RG' e 'Emissão de CPF' (2 registros)",
+    "observado": "Busca 'EMISSAO' (sem acento/maiúsculas) retornou RG (105) e CPF (102): Total 2",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T14",
+    "nome": "Pesquisar por categoria e por público-alvo",
+    "pre": "8 registros de exemplo",
+    "entrada": "6 → 2 → 'saude'; 6 → 3 → 'MORADORES'",
+    "esperado": "2 registros em cada pesquisa",
+    "observado": "Categoria 'saude' → 2 registros (103, 104); público 'MORADORES' → 2 registros (108, 104)",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T15",
+    "nome": "Pesquisa com termo vazio, sem resultados e opção inválida no submenu",
+    "pre": "8 registros de exemplo",
+    "entrada": "6 → 1 → '' → 'zzz'; 6 → 9 → 1 → 'xyz'",
+    "esperado": "Mensagens claras de erro e de 'nenhum registro encontrado'",
+    "observado": "Termo vazio rejeitado; 'zzz' e 'xyz' sem resultados; opção '9' inválida no submenu",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T16",
+    "nome": "Ordenar por identificador (crescente)",
+    "pre": "8 registros de exemplo (inseridos fora de ordem)",
+    "entrada": "7 → 1 (id) → 1 (crescente)",
+    "esperado": "ids em ordem 101, 102, 103, 104, 105, 107, 108, 110",
+    "observado": "Ordem dos ids após ordenar: [101, 102, 103, 104, 105, 107, 108, 110]",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T17",
+    "nome": "Ordenar por título (decrescente)",
+    "pre": "8 registros de exemplo",
+    "entrada": "7 → 2 (título) → 2 (decrescente)",
+    "esperado": "Títulos de Z para A (ignorando acentos)",
+    "observado": "Títulos em ordem decrescente: ['Vacinação infantil', 'Mutirão de limpeza do bairro', 'Matrícula na rede municipal', 'Emissão de RG', 'Emissão de CPF', 'Consulta médica básica', 'Cadastro Único (CadÚnico)', 'Bolsa Família - consulta de benefício']",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T18",
+    "nome": "Ordenar por categoria (crescente, estável)",
+    "pre": "8 registros de exemplo",
+    "entrada": "7 → 3 (categoria) → 1 (crescente)",
+    "esperado": "Categorias em ordem alfabética; empates mantêm a ordem original",
+    "observado": "Categorias: ['Assistência Social', 'Assistência Social', 'Atendimento Comunitário', 'Documentos', 'Documentos', 'Educação', 'Saúde', 'Saúde']; ids: [101, 107, 108, 105, 102, 110, 103, 104] (ordenação estável)",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T19",
+    "nome": "Ordenação em casos limite (lista vazia, 1 elemento, critério inválido)",
+    "pre": "Listas pequenas",
+    "entrada": "ordenar() com 0 e 1 elemento; critério 'inexistente'",
+    "esperado": "Sem erros nos casos válidos; ValueError no critério inválido",
+    "observado": "Ordenar lista vazia e lista com 1 elemento funciona; critério inexistente levanta ValueError",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T20",
+    "nome": "Opções inválidas no menu principal e saída",
+    "pre": "Lista vazia",
+    "entrada": "9, 'abc', '' , -1, 1.5, 0",
+    "esperado": "5 mensagens de opção inexistente; opção 0 encerra o programa",
+    "observado": "'Opção inexistente' exibida 5 vezes; sistema encerrou normalmente com '0'",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T21",
+    "nome": "Encerramento inesperado da entrada (EOF)",
+    "pre": "Lista vazia",
+    "entrada": "3 e fim da entrada",
+    "esperado": "Programa termina com mensagem amigável, sem traceback",
+    "observado": "Fim da entrada (Ctrl+D/Ctrl+Z) tratado sem erro: 'Entrada encerrada. Saindo do sistema.'",
+    "status": "PASSOU"
+  },
+  {
+    "id": "T22",
+    "nome": "Teste de volume (2000 registros)",
+    "pre": "Lista vazia",
+    "entrada": "2000 inserções aleatórias; ordenar por id; ordenar por título decrescente; inserir id repetido",
+    "esperado": "Ordem correta nas duas ordenações; invariantes mantidos; duplicado rejeitado",
+    "observado": "2000 registros inseridos fora de ordem; ordenação por id e por título (decrescente) correta; duplicado rejeitado",
+    "status": "PASSOU"
+  }
+]

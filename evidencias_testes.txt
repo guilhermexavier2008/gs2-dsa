@@ -1,0 +1,759 @@
+==============================================================================
+T01 - Operações sobre lista vazia (listar, consultar, atualizar, excluir, pesquisar, ordenar)
+Pré-condição : Lista vazia
+Entrada      : 3, 2, 4, 5, 6, 7, 0
+Esperado     : Cada operação informa 'A lista está vazia' sem erro; sistema não quebra
+Observado    : Mensagem 'A lista está vazia' exibida 6 vez(es); tamanho = 0
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 3
+
+=== Todos os registros ===
+A lista está vazia. Nenhum registro cadastrado.
+[menu principal]
+Escolha uma opção: 2
+
+=== Consultar por identificador ===
+A lista está vazia. Cadastre registros primeiro.
+[menu principal]
+Escolha uma opção: 4
+
+=== Atualizar registro ===
+A lista está vazia. Nada para atualizar.
+[menu principal]
+Escolha uma opção: 5
+
+=== Excluir registro ===
+A lista está vazia. Nada para excluir.
+[menu principal]
+Escolha uma opção: 6
+
+=== Pesquisar registros ===
+A lista está vazia. Nada para pesquisar.
+[menu principal]
+Escolha uma opção: 7
+
+=== Ordenar registros ===
+A lista está vazia. Nada para ordenar.
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T02 - Cadastro válido de um serviço
+Pré-condição : Lista vazia
+Entrada      : 1 → id 201, título, categoria 1, descrição, público, canal, horário; depois 3 (listar)
+Esperado     : Mensagem de sucesso; registro aparece na listagem (total 1)
+Observado    : Registro 201 encontrado: Segunda via de certidão; categoria = Documentos; tamanho = 1
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 1
+
+=== Cadastrar novo serviço/orientação ===
+Identificador: 201
+Título: Segunda via de certidão
+Categorias:
+  1) Documentos
+  2) Assistência Social
+  3) Educação
+  4) Saúde
+  5) Atendimento Comunitário
+  6) Outros
+Categoria (número ou nome): 1
+Descrição: Emissão de segunda via de certidão de nascimento ou casamento.
+Público-alvo: Qualquer cidadão
+Canal/Local de atendimento: Cartório de registro civil
+Horário de atendimento: Seg a Sex, 9h às 16h
+✓ Serviço 201 cadastrado com sucesso.
+[menu principal]
+Escolha uma opção: 3
+
+=== Todos os registros ===
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+201   Segunda via de certidão           Documentos               Cartório de registro civil    
+-----------------------------------------------------------------------------------------------
+Total: 1 registro(s).
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T03 - Cadastro com entradas inválidas (vazios, texto no id, zero, negativo, categoria inexistente, textos curtos)
+Pré-condição : Lista vazia
+Entrada      : id: '', 'abc', '0', '-5', '7.5' e depois 301; título: '', 'ab'; categoria: '99', 'esporte'; descrição/público/canal vazios ou curtos
+Esperado     : Mensagem clara para cada erro, o campo é solicitado novamente e só então o registro é salvo
+Observado    : Cada entrada inválida gerou mensagem e foi pedida novamente; registro 301 salvo com horário 'Não informado'; tamanho = 1
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 1
+
+=== Cadastrar novo serviço/orientação ===
+Identificador: 
+  ✗ Identificador não pode ficar vazio.
+Identificador: abc
+  ✗ Identificador deve conter apenas números inteiros positivos.
+Identificador: 0
+  ✗ Identificador deve ser maior que zero.
+Identificador: -5
+  ✗ Identificador deve conter apenas números inteiros positivos.
+Identificador: 7.5
+  ✗ Identificador deve conter apenas números inteiros positivos.
+Identificador: 301
+Título: 
+  ✗ Título é obrigatório e não pode ficar vazio.
+Título: ab
+  ✗ Título muito curto (mínimo 3 caracteres).
+Título: Orientação sobre IPTU
+Categorias:
+  1) Documentos
+  2) Assistência Social
+  3) Educação
+  4) Saúde
+  5) Atendimento Comunitário
+  6) Outros
+Categoria (número ou nome): 99
+  ✗ Categoria inválida. Use uma de: Documentos, Assistência Social, Educação, Saúde, Atendimento Comunitário, Outros.
+Categoria (número ou nome): esporte
+  ✗ Categoria inválida. Use uma de: Documentos, Assistência Social, Educação, Saúde, Atendimento Comunitário, Outros.
+Categoria (número ou nome): Outros
+Descrição: 
+  ✗ Descrição é obrigatório e não pode ficar vazio.
+Descrição: curta
+  ✗ Descrição muito curto (mínimo 10 caracteres).
+Descrição: Orientações sobre pagamento e isenção do IPTU.
+Público-alvo: 
+  ✗ Público-alvo é obrigatório e não pode ficar vazio.
+Público-alvo: Proprietários de imóveis
+Canal/Local de atendimento:   
+  ✗ Canal/Local de atendimento é obrigatório e não pode ficar vazio.
+Canal/Local de atendimento: Secretaria da Fazenda
+Horário de atendimento: 
+✓ Serviço 301 cadastrado com sucesso.
+[menu principal]
+Escolha uma opção: 3
+
+=== Todos os registros ===
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+301   Orientação sobre IPTU             Outros                   Secretaria da Fazenda         
+-----------------------------------------------------------------------------------------------
+Total: 1 registro(s).
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T04 - Identificador duplicado
+Pré-condição : Registro 201 já cadastrado
+Entrada      : 1 → id 201 (duplicado); depois id 202 e demais campos
+Esperado     : Mensagem 'já está em uso'; novo id aceito; lista com 2 registros (201 e 202)
+Observado    : Mensagem de duplicidade exibida; ids na lista = [201, 202]
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 1
+
+=== Cadastrar novo serviço/orientação ===
+Identificador: 201
+Título: Segunda via de certidão
+Categorias:
+  1) Documentos
+  2) Assistência Social
+  3) Educação
+  4) Saúde
+  5) Atendimento Comunitário
+  6) Outros
+Categoria (número ou nome): 1
+Descrição: Emissão de segunda via de certidão de nascimento ou casamento.
+Público-alvo: Qualquer cidadão
+Canal/Local de atendimento: Cartório de registro civil
+Horário de atendimento: Seg a Sex, 9h às 16h
+✓ Serviço 201 cadastrado com sucesso.
+[menu principal]
+Escolha uma opção: 1
+
+=== Cadastrar novo serviço/orientação ===
+Identificador: 201
+  ✗ Identificador 201 já está em uso. Escolha outro.
+Identificador: 202
+Título: Matrícula em creche
+Categorias:
+  1) Documentos
+  2) Assistência Social
+  3) Educação
+  4) Saúde
+  5) Atendimento Comunitário
+  6) Outros
+Categoria (número ou nome): 3
+Descrição: Cadastro de crianças de 0 a 3 anos em creches municipais.
+Público-alvo: Responsáveis por crianças pequenas
+Canal/Local de atendimento: Portal da Educação
+Horário de atendimento: 
+✓ Serviço 202 cadastrado com sucesso.
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T05 - Carregar dados de exemplo e listar todos (e repetir a carga)
+Pré-condição : Lista vazia
+Entrada      : 8, 3, 8, 0
+Esperado     : 8 registros carregados e listados; segunda carga não duplica
+Observado    : Carga de 8 registros, listagem com 'Total: 8' e segunda carga sem duplicar; tamanho = 8
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 8
+✓ 8 registro(s) de exemplo (fictícios) carregado(s).
+[menu principal]
+Escolha uma opção: 3
+
+=== Todos os registros ===
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+105   Emissão de RG                     Documentos               Posto de identificação - ...  
+101   Cadastro Único (CadÚnico)         Assistência Social       CRAS do bairro                
+110   Matrícula na rede municipal       Educação                 Portal da Educação (online)   
+103   Vacinação infantil                Saúde                    UBS mais próxima              
+108   Mutirão de limpeza do bairro      Atendimento Comunitário  Associação de moradores       
+102   Emissão de CPF                    Documentos               Agências dos Correios e s...  
+107   Bolsa Família - consulta de b...  Assistência Social       Aplicativo oficial e CRAS     
+104   Consulta médica básica            Saúde                    UBS do bairro                 
+-----------------------------------------------------------------------------------------------
+Total: 8 registro(s).
+[menu principal]
+Escolha uma opção: 8
+Os dados de exemplo já estavam carregados (nenhum registro novo).
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T06 - Consultar registro pelo identificador (existente)
+Pré-condição : 8 registros de exemplo
+Entrada      : 2 → 103
+Esperado     : Exibe todos os campos do registro 103
+Observado    : Detalhes completos do registro 103 exibidos (Vacinação infantil / Saúde)
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 2
+
+=== Consultar por identificador ===
+Identificador: 103
+------------------------------------------------------------
+Identificador: 103
+Título: Vacinação infantil
+Categoria: Saúde
+Descrição: Aplicação das vacinas do calendário nacional de imunização.
+Público-alvo: Crianças de 0 a 12 anos
+Canal/Local de atendimento: UBS mais próxima
+Horário de atendimento: Seg a Sex, 7h às 17h
+------------------------------------------------------------
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T07 - Consultar identificador inexistente e valor incompatível
+Pré-condição : 8 registros de exemplo
+Entrada      : 2 → 'xyz', depois 999
+Esperado     : Erro de formato para 'xyz'; mensagem 'não encontrado' para 999
+Observado    : Entrada 'xyz' rejeitada; id 999 retornou 'não encontrado'
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 2
+
+=== Consultar por identificador ===
+Identificador: xyz
+  ✗ Identificador deve conter apenas números inteiros positivos.
+Identificador: 999
+Registro com identificador 999 não encontrado.
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T08 - Atualizar registro existente (alterar título e horário, manter o resto com Enter)
+Pré-condição : 8 registros de exemplo
+Entrada      : 4 → 103; novo título; Enter nos campos a manter; novo horário; depois 2 → 103
+Esperado     : Registro atualizado; campos não alterados permanecem; consulta mostra novos valores
+Observado    : Título = 'Vacinação infantil e de adultos'; categoria mantida = 'Saúde'; horário = 'Seg a Sáb, 7h às 17h'
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 4
+
+=== Atualizar registro ===
+Identificador: 103
+------------------------------------------------------------
+Identificador: 103
+Título: Vacinação infantil
+Categoria: Saúde
+Descrição: Aplicação das vacinas do calendário nacional de imunização.
+Público-alvo: Crianças de 0 a 12 anos
+Canal/Local de atendimento: UBS mais próxima
+Horário de atendimento: Seg a Sex, 7h às 17h
+------------------------------------------------------------
+Pressione Enter para manter o valor atual de cada campo.
+Título [Vacinação infantil] (Enter mantém): Vacinação infantil e de adultos
+Categorias:
+  1) Documentos
+  2) Assistência Social
+  3) Educação
+  4) Saúde
+  5) Atendimento Comunitário
+  6) Outros
+Categoria [Saúde] (número ou nome, Enter mantém): 
+Descrição [Aplicação das vacinas do calendário n...] (Enter mantém): 
+Público-alvo [Crianças de 0 a 12 anos] (Enter mantém): 
+Canal/Local de atendimento [UBS mais próxima] (Enter mantém): 
+Horário de atendimento [Seg a Sex, 7h às 17h] (Enter mantém): Seg a Sáb, 7h às 17h
+✓ Registro 103 atualizado.
+[menu principal]
+Escolha uma opção: 2
+
+=== Consultar por identificador ===
+Identificador: 103
+------------------------------------------------------------
+Identificador: 103
+Título: Vacinação infantil e de adultos
+Categoria: Saúde
+Descrição: Aplicação das vacinas do calendário nacional de imunização.
+Público-alvo: Crianças de 0 a 12 anos
+Canal/Local de atendimento: UBS mais próxima
+Horário de atendimento: Seg a Sáb, 7h às 17h
+------------------------------------------------------------
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T09 - Atualizar com valor inválido
+Pré-condição : 8 registros de exemplo
+Entrada      : 4 → 103; título 'ab' (inválido) e depois 'Vacinação em campanha'
+Esperado     : Mensagem de erro, campo pedido novamente e atualização concluída com valor válido
+Observado    : Título 'ab' rejeitado; valor válido gravado: 'Vacinação em campanha'
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 4
+
+=== Atualizar registro ===
+Identificador: 103
+------------------------------------------------------------
+Identificador: 103
+Título: Vacinação infantil
+Categoria: Saúde
+Descrição: Aplicação das vacinas do calendário nacional de imunização.
+Público-alvo: Crianças de 0 a 12 anos
+Canal/Local de atendimento: UBS mais próxima
+Horário de atendimento: Seg a Sex, 7h às 17h
+------------------------------------------------------------
+Pressione Enter para manter o valor atual de cada campo.
+Título [Vacinação infantil] (Enter mantém): ab
+  ✗ Título muito curto (mínimo 3 caracteres).
+Título [Vacinação infantil] (Enter mantém): Vacinação em campanha
+Categorias:
+  1) Documentos
+  2) Assistência Social
+  3) Educação
+  4) Saúde
+  5) Atendimento Comunitário
+  6) Outros
+Categoria [Saúde] (número ou nome, Enter mantém): 
+Descrição [Aplicação das vacinas do calendário n...] (Enter mantém): 
+Público-alvo [Crianças de 0 a 12 anos] (Enter mantém): 
+Canal/Local de atendimento [UBS mais próxima] (Enter mantém): 
+Horário de atendimento [Seg a Sex, 7h às 17h] (Enter mantém): 
+✓ Registro 103 atualizado.
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T10 - Atualizar identificador inexistente
+Pré-condição : 8 registros de exemplo
+Entrada      : 4 → 999
+Esperado     : Mensagem 'não encontrado'; nada é alterado
+Observado    : Mensagem 'não encontrado'; lista inalterada (8 registros)
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 4
+
+=== Atualizar registro ===
+Identificador: 999
+Registro com identificador 999 não encontrado.
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T11 - Excluir registro (confirmação inválida, confirmação 's', cancelamento 'n' e id inexistente)
+Pré-condição : 8 registros de exemplo
+Entrada      : 5 → 104, 'x', 's'; 5 → 108, 'n'; 5 → 999
+Esperado     : 104 removido; 108 permanece; 999 'não encontrado'; total passa de 8 para 7
+Observado    : 104 excluído; 108 mantido (cancelado); 999 não encontrado; tamanho = 7; invariantes OK
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 5
+
+=== Excluir registro ===
+Identificador: 104
+------------------------------------------------------------
+Identificador: 104
+Título: Consulta médica básica
+Categoria: Saúde
+Descrição: Atendimento clínico geral e encaminhamento para especialistas.
+Público-alvo: Moradores da área de cobertura
+Canal/Local de atendimento: UBS do bairro
+Horário de atendimento: Seg a Sex, 7h às 16h
+------------------------------------------------------------
+Confirma a exclusão? (s/n): x
+  ✗ Responda apenas com 's' ou 'n'.
+Confirma a exclusão? (s/n): s
+✓ Registro 104 excluído.
+[menu principal]
+Escolha uma opção: 5
+
+=== Excluir registro ===
+Identificador: 108
+------------------------------------------------------------
+Identificador: 108
+Título: Mutirão de limpeza do bairro
+Categoria: Atendimento Comunitário
+Descrição: Ação voluntária de limpeza de praças e córregos.
+Público-alvo: Moradores do bairro
+Canal/Local de atendimento: Associação de moradores
+Horário de atendimento: Sábados, 9h
+------------------------------------------------------------
+Confirma a exclusão? (s/n): n
+Exclusão cancelada.
+[menu principal]
+Escolha uma opção: 5
+
+=== Excluir registro ===
+Identificador: 999
+Registro com identificador 999 não encontrado.
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T12 - Remoção no início, no meio e no fim da lista encadeada (ponteiros início/fim)
+Pré-condição : Lista com ids 1 a 5
+Entrada      : remover(1), remover(3), remover(5), remover(9), inserir(6), esvaziar
+Esperado     : Ligações corretas; ids [2, 4, 6]; 'fim' atualizado; lista vazia termina com início e fim nulos
+Observado    : Removidos primeiro, meio e último; ids restantes [2, 4, 6] após novo insert; lista esvaziada com inicio=fim=None
+Resultado    : PASSOU
+--- saída do terminal ---
+(teste de estrutura, sem menu)
+Removidos primeiro, meio e último; ids restantes [2, 4, 6] após novo insert; lista esvaziada com inicio=fim=None
+==============================================================================
+T13 - Pesquisar por título (ignora maiúsculas e acentos)
+Pré-condição : 8 registros de exemplo
+Entrada      : 6 → 1 (título) → 'EMISSAO'
+Esperado     : Retorna 'Emissão de RG' e 'Emissão de CPF' (2 registros)
+Observado    : Busca 'EMISSAO' (sem acento/maiúsculas) retornou RG (105) e CPF (102): Total 2
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 6
+
+=== Pesquisar registros ===
+Pesquisar por qual atributo?
+  1) Título
+  2) Categoria
+  3) Público-alvo
+  4) Canal/Local
+  5) Descrição
+Escolha: 1
+Termo de busca: EMISSAO
+Resultado da busca por 'EMISSAO':
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+105   Emissão de RG                     Documentos               Posto de identificação - ...  
+102   Emissão de CPF                    Documentos               Agências dos Correios e s...  
+-----------------------------------------------------------------------------------------------
+Total: 2 registro(s).
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T14 - Pesquisar por categoria e por público-alvo
+Pré-condição : 8 registros de exemplo
+Entrada      : 6 → 2 → 'saude'; 6 → 3 → 'MORADORES'
+Esperado     : 2 registros em cada pesquisa
+Observado    : Categoria 'saude' → 2 registros (103, 104); público 'MORADORES' → 2 registros (108, 104)
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 6
+
+=== Pesquisar registros ===
+Pesquisar por qual atributo?
+  1) Título
+  2) Categoria
+  3) Público-alvo
+  4) Canal/Local
+  5) Descrição
+Escolha: 2
+Termo de busca: saude
+Resultado da busca por 'saude':
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+103   Vacinação infantil                Saúde                    UBS mais próxima              
+104   Consulta médica básica            Saúde                    UBS do bairro                 
+-----------------------------------------------------------------------------------------------
+Total: 2 registro(s).
+[menu principal]
+Escolha uma opção: 6
+
+=== Pesquisar registros ===
+Pesquisar por qual atributo?
+  1) Título
+  2) Categoria
+  3) Público-alvo
+  4) Canal/Local
+  5) Descrição
+Escolha: 3
+Termo de busca: MORADORES
+Resultado da busca por 'MORADORES':
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+108   Mutirão de limpeza do bairro      Atendimento Comunitário  Associação de moradores       
+104   Consulta médica básica            Saúde                    UBS do bairro                 
+-----------------------------------------------------------------------------------------------
+Total: 2 registro(s).
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T15 - Pesquisa com termo vazio, sem resultados e opção inválida no submenu
+Pré-condição : 8 registros de exemplo
+Entrada      : 6 → 1 → '' → 'zzz'; 6 → 9 → 1 → 'xyz'
+Esperado     : Mensagens claras de erro e de 'nenhum registro encontrado'
+Observado    : Termo vazio rejeitado; 'zzz' e 'xyz' sem resultados; opção '9' inválida no submenu
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 6
+
+=== Pesquisar registros ===
+Pesquisar por qual atributo?
+  1) Título
+  2) Categoria
+  3) Público-alvo
+  4) Canal/Local
+  5) Descrição
+Escolha: 1
+Termo de busca: 
+  ✗ O termo de busca não pode ficar vazio.
+Termo de busca: zzz
+Nenhum registro encontrado para 'zzz' em Título.
+[menu principal]
+Escolha uma opção: 6
+
+=== Pesquisar registros ===
+Pesquisar por qual atributo?
+  1) Título
+  2) Categoria
+  3) Público-alvo
+  4) Canal/Local
+  5) Descrição
+Escolha: 9
+  ✗ Opção inválida. Digite um número de 1 a 5.
+Escolha: 1
+Termo de busca: xyz
+Nenhum registro encontrado para 'xyz' em Título.
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T16 - Ordenar por identificador (crescente)
+Pré-condição : 8 registros de exemplo (inseridos fora de ordem)
+Entrada      : 7 → 1 (id) → 1 (crescente)
+Esperado     : ids em ordem 101, 102, 103, 104, 105, 107, 108, 110
+Observado    : Ordem dos ids após ordenar: [101, 102, 103, 104, 105, 107, 108, 110]
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 7
+
+=== Ordenar registros ===
+Ordenar por qual critério?
+  1) Identificador
+  2) Título
+  3) Categoria
+Escolha: 1
+Em qual sentido?
+  1) Crescente (A-Z / menor para maior)
+  2) Decrescente (Z-A / maior para menor)
+Escolha: 1
+✓ Lista ordenada por Identificador (crescente).
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+101   Cadastro Único (CadÚnico)         Assistência Social       CRAS do bairro                
+102   Emissão de CPF                    Documentos               Agências dos Correios e s...  
+103   Vacinação infantil                Saúde                    UBS mais próxima              
+104   Consulta médica básica            Saúde                    UBS do bairro                 
+105   Emissão de RG                     Documentos               Posto de identificação - ...  
+107   Bolsa Família - consulta de b...  Assistência Social       Aplicativo oficial e CRAS     
+108   Mutirão de limpeza do bairro      Atendimento Comunitário  Associação de moradores       
+110   Matrícula na rede municipal       Educação                 Portal da Educação (online)   
+-----------------------------------------------------------------------------------------------
+Total: 8 registro(s).
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T17 - Ordenar por título (decrescente)
+Pré-condição : 8 registros de exemplo
+Entrada      : 7 → 2 (título) → 2 (decrescente)
+Esperado     : Títulos de Z para A (ignorando acentos)
+Observado    : Títulos em ordem decrescente: ['Vacinação infantil', 'Mutirão de limpeza do bairro', 'Matrícula na rede municipal', 'Emissão de RG', 'Emissão de CPF', 'Consulta médica básica', 'Cadastro Único (CadÚnico)', 'Bolsa Família - consulta de benefício']
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 7
+
+=== Ordenar registros ===
+Ordenar por qual critério?
+  1) Identificador
+  2) Título
+  3) Categoria
+Escolha: 2
+Em qual sentido?
+  1) Crescente (A-Z / menor para maior)
+  2) Decrescente (Z-A / maior para menor)
+Escolha: 2
+✓ Lista ordenada por Título (decrescente).
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+103   Vacinação infantil                Saúde                    UBS mais próxima              
+108   Mutirão de limpeza do bairro      Atendimento Comunitário  Associação de moradores       
+110   Matrícula na rede municipal       Educação                 Portal da Educação (online)   
+105   Emissão de RG                     Documentos               Posto de identificação - ...  
+102   Emissão de CPF                    Documentos               Agências dos Correios e s...  
+104   Consulta médica básica            Saúde                    UBS do bairro                 
+101   Cadastro Único (CadÚnico)         Assistência Social       CRAS do bairro                
+107   Bolsa Família - consulta de b...  Assistência Social       Aplicativo oficial e CRAS     
+-----------------------------------------------------------------------------------------------
+Total: 8 registro(s).
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T18 - Ordenar por categoria (crescente, estável)
+Pré-condição : 8 registros de exemplo
+Entrada      : 7 → 3 (categoria) → 1 (crescente)
+Esperado     : Categorias em ordem alfabética; empates mantêm a ordem original
+Observado    : Categorias: ['Assistência Social', 'Assistência Social', 'Atendimento Comunitário', 'Documentos', 'Documentos', 'Educação', 'Saúde', 'Saúde']; ids: [101, 107, 108, 105, 102, 110, 103, 104] (ordenação estável)
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 7
+
+=== Ordenar registros ===
+Ordenar por qual critério?
+  1) Identificador
+  2) Título
+  3) Categoria
+Escolha: 3
+Em qual sentido?
+  1) Crescente (A-Z / menor para maior)
+  2) Decrescente (Z-A / maior para menor)
+Escolha: 1
+✓ Lista ordenada por Categoria (crescente).
+ID    Título                            Categoria                Canal                         
+-----------------------------------------------------------------------------------------------
+101   Cadastro Único (CadÚnico)         Assistência Social       CRAS do bairro                
+107   Bolsa Família - consulta de b...  Assistência Social       Aplicativo oficial e CRAS     
+108   Mutirão de limpeza do bairro      Atendimento Comunitário  Associação de moradores       
+105   Emissão de RG                     Documentos               Posto de identificação - ...  
+102   Emissão de CPF                    Documentos               Agências dos Correios e s...  
+110   Matrícula na rede municipal       Educação                 Portal da Educação (online)   
+103   Vacinação infantil                Saúde                    UBS mais próxima              
+104   Consulta médica básica            Saúde                    UBS do bairro                 
+-----------------------------------------------------------------------------------------------
+Total: 8 registro(s).
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T19 - Ordenação em casos limite (lista vazia, 1 elemento, critério inválido)
+Pré-condição : Listas pequenas
+Entrada      : ordenar() com 0 e 1 elemento; critério 'inexistente'
+Esperado     : Sem erros nos casos válidos; ValueError no critério inválido
+Observado    : Ordenar lista vazia e lista com 1 elemento funciona; critério inexistente levanta ValueError
+Resultado    : PASSOU
+--- saída do terminal ---
+(teste de estrutura, sem menu)
+Ordenar lista vazia e lista com 1 elemento funciona; critério inexistente levanta ValueError
+==============================================================================
+T20 - Opções inválidas no menu principal e saída
+Pré-condição : Lista vazia
+Entrada      : 9, 'abc', '' , -1, 1.5, 0
+Esperado     : 5 mensagens de opção inexistente; opção 0 encerra o programa
+Observado    : 'Opção inexistente' exibida 5 vezes; sistema encerrou normalmente com '0'
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 9
+✗ Opção inexistente. Digite um número de 0 a 8.
+[menu principal]
+Escolha uma opção: abc
+✗ Opção inexistente. Digite um número de 0 a 8.
+[menu principal]
+Escolha uma opção: 
+✗ Opção inexistente. Digite um número de 0 a 8.
+[menu principal]
+Escolha uma opção: -1
+✗ Opção inexistente. Digite um número de 0 a 8.
+[menu principal]
+Escolha uma opção: 1.5
+✗ Opção inexistente. Digite um número de 0 a 8.
+[menu principal]
+Escolha uma opção: 0
+Encerrando o Citizen Assist AI. Até logo!
+
+==============================================================================
+T21 - Encerramento inesperado da entrada (EOF)
+Pré-condição : Lista vazia
+Entrada      : 3 e fim da entrada
+Esperado     : Programa termina com mensagem amigável, sem traceback
+Observado    : Fim da entrada (Ctrl+D/Ctrl+Z) tratado sem erro: 'Entrada encerrada. Saindo do sistema.'
+Resultado    : PASSOU
+--- saída do terminal ---
+[menu principal]
+Escolha uma opção: 3
+
+=== Todos os registros ===
+A lista está vazia. Nenhum registro cadastrado.
+[menu principal]
+
+Entrada encerrada. Saindo do sistema.
+
+==============================================================================
+T22 - Teste de volume (2000 registros)
+Pré-condição : Lista vazia
+Entrada      : 2000 inserções aleatórias; ordenar por id; ordenar por título decrescente; inserir id repetido
+Esperado     : Ordem correta nas duas ordenações; invariantes mantidos; duplicado rejeitado
+Observado    : 2000 registros inseridos fora de ordem; ordenação por id e por título (decrescente) correta; duplicado rejeitado
+Resultado    : PASSOU
+--- saída do terminal ---
+(teste de volume, sem menu)
+2000 registros inseridos fora de ordem; ordenação por id e por título (decrescente) correta; duplicado rejeitado
